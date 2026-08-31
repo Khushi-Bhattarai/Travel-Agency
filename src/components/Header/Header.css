@@ -44,7 +44,8 @@ nav li {
     list-style: none;
 }
 
-nav a {
+nav a,
+.brand a {
     display: inline-block;
     text-decoration: none;
     color: #000;

@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import './Header.css';
 import Button from '../Button/Button';
 import { Wheat } from 'lucide-react';
@@ -15,7 +15,7 @@ function Header() {
         {
             label: 'Home',
             path: '/'
-        }, 
+        },
         {
             label: 'Destinations',
             path: '/destinations'
@@ -35,9 +35,13 @@ function Header() {
         <header>
             <div className="brand">
                 <div className="logo">
-                    <Wheat />
+                    <Link to={`/`}>
+                        <Wheat />
+                    </Link>
                 </div>
-                <p>Vasudev Travel Agency</p>
+                <Link to={`/`}>
+                    <p>Vasudev Travel Agency</p>
+                </Link>
             </div>
             <nav>
                 <ul>
