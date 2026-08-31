@@ -1,0 +1,17 @@
+.hero-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-md);
+    gap: var(--space-xs);
+    align-items: center;
+    border: 2px solid var(--primary);
+    border-radius: var(--space-2xs);
+    animation: slideLeft 900ms ease;
+}
+
+@media (max-width:576px) {
+
+    .hero-card{
+        padding: var(--space-2xs);
+    }
+}

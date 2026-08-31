@@ -1,0 +1,25 @@
+button {
+    padding: var(--space-xs);
+    border: 2px solid var(--primary);
+    border-radius: var(--space-xs);
+
+    background: transparent;
+
+    transition:
+        background-color 200ms ease,
+        color 200ms ease,
+        transform 100ms ease,
+        box-shadow 300ms ease;
+    animation: slideLeft 400ms linear;
+}
+
+button:hover {
+    cursor: pointer;
+    color: lightsteelblue;
+    background-color: var(--primary);
+}
+
+button:active {
+    box-shadow: var(--shadow);
+    transform: translateY(2px);
+}

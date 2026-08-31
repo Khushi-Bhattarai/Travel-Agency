@@ -1,0 +1,33 @@
+/* popular_destination-section */
+.popular-destination {
+    display: grid;
+    padding-top: var(--space-4xl);
+    gap: var(--space-lg);
+}
+
+.destinations {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-xs);
+    padding: var(--space-sm);
+}
+
+@media (max-width:992px){
+    .destinations {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width:768px){
+
+    .popular-destination{
+        padding-top: var(--space-xs);
+    }
+}
+
+@media (max-width:576px){
+
+    .destinations{
+        grid-template-columns: 1fr;
+    }
+}

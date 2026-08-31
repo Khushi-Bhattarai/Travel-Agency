@@ -1,0 +1,44 @@
+.tour-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    align-items: center;
+    border: 2px solid var(--primary);
+    border-radius: var(--space-2xs);
+    animation: slideLeft 900ms ease;
+    transition:
+        transform 300ms ease,
+        box-shadow 200ms linear;
+}
+
+.tour-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+}
+
+.tour-card .card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding: var(--space-lg);
+    flex: 1;
+}
+
+.package-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xs);
+}
+
+.tour-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/9;
+}
+
+.tour-card .card-content button {
+    width: fit-content;
+    margin-top: auto;
+    align-self: center;
+}

@@ -1,0 +1,102 @@
+/* Booking page */
+
+.booking {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-2xl);
+    padding: var(--space-3xl) var(--space-lg);
+    max-width: 1200px;
+    margin: auto;
+}
+
+
+/* Destination summary */
+
+.booking-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+
+    padding: var(--space-md);
+
+    border: 2px solid var(--primary);
+    border-radius: var(--space-sm);
+
+}
+
+.booking-container h1 {
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.booking-container h2 {
+    text-align: left;
+}
+
+
+/* Booking form */
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+
+    padding: var(--space-md);
+
+    border: 2px solid var(--primary);
+    border-radius: var(--space-sm);
+
+}
+
+.booking-form .bookForm{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    gap: var(--space-sm);
+}
+
+.booking-form label {
+    font-weight: 500;
+    margin-top: var(--space-xs);
+}
+
+.booking-form input,
+.booking-form textarea {
+    width: 100%;
+    padding: var(--space-sm);
+
+    border: 1px solid #999;
+    border-radius: var(--space-xs);
+
+    font: inherit;
+}
+
+/* Submit button */
+
+.form-submit {
+    width: fit-content;
+
+    margin: var(--space-md) auto 0;
+
+    padding: var(--space-sm) var(--space-lg);
+
+    border: 2px solid var(--primary);
+    border-radius: var(--space-xs);
+
+    cursor: pointer;
+
+    transition:
+        background-color 200ms ease,
+        color 200ms ease,
+        transform 100ms ease,
+        box-shadow 300ms ease;
+}
+
+.form-submit:hover {
+    color: lightsteelblue;
+    background-color: var(--primary);
+}
+
+.form-submit:active {
+    transform: translateY(2px);
+    box-shadow: var(--shadow);
+}
