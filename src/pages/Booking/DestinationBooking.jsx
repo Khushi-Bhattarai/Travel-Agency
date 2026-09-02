@@ -18,7 +18,7 @@ function DestinationBooking() {
     );
 
     const initialformData = {
-          
+
         name: '',
         email: '',
         phone: '',
@@ -27,10 +27,10 @@ function DestinationBooking() {
         requests: ''
 
     }
-  const [formData, setFormData] = useState(initialformData);
+    const [formData, setFormData] = useState(initialformData);
 
     const initalerrors = {
-         
+
         name: '',
         email: '',
         phone: '',
@@ -39,7 +39,7 @@ function DestinationBooking() {
         requests: ''
 
     }
-   const [errors, setErrors] = useState(initalerrors);
+    const [errors, setErrors] = useState(initalerrors);
 
 
     function handleChange(e) {
@@ -50,21 +50,153 @@ function DestinationBooking() {
             [name]: value
         });
 
+        if (name === "name") {
+
+            if (value.trim() === "") {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    name: 'Name cannot be blank'
+                }));
+            }
+            else if (value.trim().length < 3) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    name: "Name should  contain atleast 3 characters"
+                }))
+            }
+
+            else if (!namePattern.test(value.trim())) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    name: 'Name can only contain letters and in between spaces'
+                }))
+            }
+            else {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    name: ''
+                }));
+            }
+        }
+
+
+        if (name === "email") {
+
+            if (
+                value.trim() === ""
+            ) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    email: 'Email cannot be blank'
+                }));
+            }
+            else if (!emailPattern.test(value.trim())) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    email: 'Enter a valid email address'
+                }))
+            }
+            else {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    email: ''
+                }));
+            }
+        }
+
+        if (name === "phone") {
+
+            if (value.trim() === "") {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    phone: 'Phone number cannot be blank'
+                }))
+            }
+            else if (!phonePattern.test(value.trim())) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    phone: 'Phone number should start with 97/98 and it must be of 10 digits'
+                }))
+            }
+            else {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    phone: ''
+                }));
+            }
+        }
+
+        if (name === "travellers") {
+
+            if (value.trim() === "") {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    travellers: 'Number of traveller cannot be blank'
+                }))
+            }
+            else  if (value <= 0) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    travellers: 'Atleast 1 traveller is required'
+                }))
+            }
+            else if (value > 30) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    travellers: 'Number of travellers shouldnot be more than 30'
+                }))
+            }
+            else{
+                 setErrors(prevErrors => ({
+                    ...prevErrors,
+                    travellers: ''
+                }));
+            }
+        }
+
+        if (name === "travelDate") {
+
+            const selectedDate = new Date(value);
+            selectedDate.setHours(0, 0, 0, 0);
+
+            const todaysDate = new Date();
+            todaysDate.setHours(0, 0, 0, 0);
+
+            if (value.trim() === "") {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    travelDate: 'Travel date is required'
+                }))
+            }
+            else if (selectedDate < todaysDate) {
+                setErrors(prevErrors => ({
+                    ...prevErrors,
+                    travelDate: 'Travel date cannot be in the past days'
+                }))
+            }
+            else{
+                 setErrors(prevErrors => ({
+                    ...prevErrors,
+                    travelDate: ''
+                }))
+            }
+        }
     }
 
     if (!destination) {
         return <h1>Destination not found</h1>;
     }
 
+
     function validateForm() {
 
         const errors = {};
 
         const selectedDate = new Date(formData.travelDate);
-        selectedDate.setHours(0,0,0,0);
+        selectedDate.setHours(0, 0, 0, 0);
 
         const todaysDate = new Date();
-        todaysDate.setHours(0,0,0,0);
+        todaysDate.setHours(0, 0, 0, 0);
 
         if (formData.name.trim() === "") {
             errors.name = "Name cannot be blank";
@@ -74,7 +206,7 @@ function DestinationBooking() {
         }
 
         else if (!namePattern.test(formData.name.trim())) {
-            errors.name = 'Name can only contain  letters and spaces';
+            errors.name = 'Name can only contain  letters and in between spaces';
         }
 
         if (formData.email.trim() === "") {
@@ -113,29 +245,30 @@ function DestinationBooking() {
             errors.travelDate = "Travel date cannot be in the past days";
         }
 
-       setErrors(errors);
+        setErrors(errors);
 
-       const hasErrors = Object.keys(errors).length > 0;
+        const hasErrors = Object.keys(errors).length > 0;
 
-       return !hasErrors;
+        return !hasErrors;
 
     }
 
     function handleSubmit(e) {
-        
+
         e.preventDefault();
 
         const isValid = validateForm();
 
-        if(!isValid ){
+        if (!isValid) {
             console.log("The form field is invalid");
             return;
         }
-        console.log(`The form field is valid`, formData );
+        console.log(`The form field is valid`, formData);
 
         setFormData(initialformData);
         setErrors(initalerrors);
     }
+
 
     return (
         <section className="booking">
