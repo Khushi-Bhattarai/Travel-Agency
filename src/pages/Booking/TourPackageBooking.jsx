@@ -1,15 +1,13 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import Destination from "../../components/PopularDestination/destination";
 import './Booking.css';
+import TourPackagesData from "../../components/TourPackages/TourPackagesData";
 
-function Booking() {
+function TourPackageBooking() {
 
-    const { destinationId } = useParams();
+    const { tourPackageId } = useParams();
 
-    const destination = Destination.find(
-        (item) => item.id === destinationId
-    );
+    const tourPackage = TourPackagesData.find((item) => item.id === tourPackageId);
 
     const [formData, setFormData] = useState({
 
@@ -37,8 +35,8 @@ function Booking() {
         console.log(formData);
     }
 
-    if (!destination) {
-        return <h1>Destination not found</h1>;
+    if (!tourPackage) {
+        return <h1>Tour Package not found</h1>;
     }
 
     return (
@@ -46,11 +44,11 @@ function Booking() {
             <div className="booking-container">
                 <h1>Book Your Trip</h1>
 
-                <h3>{destination.country}</h3>
+                <h3>{tourPackage.title}</h3>
 
-                <p>Duration: {destination.duration} days</p>
+                <p>Duration: {tourPackage.duration} days</p>
 
-                <p>Price: Rs. {destination.price.toLocaleString()}</p>
+                <p>Price: Rs. {tourPackage.price.toLocaleString()}</p>
             </div>
 
             <form
@@ -67,6 +65,7 @@ function Booking() {
                         value={formData.name}
                         onChange={handleChange}
                         autoComplete="name"
+                        placeholder="Enter your full name"
                         required
                     />
                 </div>
@@ -80,6 +79,7 @@ function Booking() {
                         value={formData.email}
                         onChange={handleChange}
                         autoComplete="email"
+                        placeholder="Enter your email"
                         required
                     />
                 </div>
@@ -93,6 +93,7 @@ function Booking() {
                         value={formData.phone}
                         onChange={handleChange}
                         autoComplete="phone"
+                        placeholder="Enter your phone number"
                         required
                     />
                 </div>
@@ -106,6 +107,7 @@ function Booking() {
                         min={1}
                         value={formData.travellers}
                         onChange={handleChange}
+                        placeholder="Enter number of travellers"
                         required
                     />
                 </div>
@@ -118,6 +120,7 @@ function Booking() {
                         type="date"
                         value={formData.travelDate}
                         onChange={handleChange}
+                        placeholder="select travel date"
                         required
                     />
                 </div>
@@ -129,6 +132,7 @@ function Booking() {
                         name="requests"
                         value={formData.requests}
                         onChange={handleChange}
+                        placeholder="Enter any special requests"
                         rows="4"
                     />
                 </div>
@@ -143,4 +147,4 @@ function Booking() {
     );
 }
 
-export default Booking;
+export default TourPackageBooking;

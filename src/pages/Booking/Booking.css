@@ -49,7 +49,7 @@
 
 .booking-form .bookForm{
     display: grid;
-    grid-template-columns: 150px 1fr;
+    grid-template-columns: 180px 1fr;
     align-items: center;
     gap: var(--space-sm);
 }
@@ -99,4 +99,13 @@
 .form-submit:active {
     transform: translateY(2px);
     box-shadow: var(--shadow);
+}
+
+.booking-form .formDesc{
+    display: flex;
+    flex-direction: column ;
+}
+
+.booking-form .formDesc p{
+    color:red;
 }

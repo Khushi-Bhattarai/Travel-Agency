@@ -1,5 +1,5 @@
-import Button from "../Button/Button";
-import './PackageCard.css'
+import './PackageCard.css';
+import { Link } from "react-router-dom";
 
 function PackageCard({ tourPackage }) {
 
@@ -23,7 +23,8 @@ function PackageCard({ tourPackage }) {
                     <p>Rs. {price.toLocaleString()}</p>
                     <p>{duration} days</p>
                 </div>
-                <Button>Book-Now</Button>
+                <Link to={`/booking/tourPackages/${tourPackage.id}`}>Book-Now</Link>
+                <Link to={`/tourPackages/${tourPackage.id}`}>View details</Link>
             </div>
         </article>
     )

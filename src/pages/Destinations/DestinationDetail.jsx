@@ -31,7 +31,7 @@ function DestinationDetail() {
             <p>Duration: {destination.duration} days</p>
 
             <Link 
-            to={`/booking/${destinationId}`}>
+            to={`/booking/destinations/${destinationId}`}>
                 Book Now
             </Link>
 

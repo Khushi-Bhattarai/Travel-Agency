@@ -65,7 +65,7 @@ function DestinationCard({ destination }) {
                         View Details
                     </Link>
 
-                    <Link to={`/booking/${destination.id}`}>
+                    <Link to={`/booking/destinations/${destination.id}`}>
                         Book Now
                     </Link>
                 </div>
