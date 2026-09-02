@@ -17,8 +17,8 @@ function DestinationBooking() {
         (item) => item.id === destinationId
     );
 
-    const [formData, setFormData] = useState({
-
+    const initialformData = {
+          
         name: '',
         email: '',
         phone: '',
@@ -26,16 +26,20 @@ function DestinationBooking() {
         travelDate: '',
         requests: ''
 
-    });
+    }
+  const [formData, setFormData] = useState(initialformData);
 
-    const [errors, setErrors] = useState({
+    const initalerrors = {
+         
         name: '',
         email: '',
         phone: '',
         travellers: '',
         travelDate: '',
         requests: ''
-    });
+
+    }
+   const [errors, setErrors] = useState(initalerrors);
 
 
     function handleChange(e) {
@@ -129,7 +133,8 @@ function DestinationBooking() {
         }
         console.log(`The form field is valid`, formData );
 
-
+        setFormData(initialformData);
+        setErrors(initalerrors);
     }
 
     return (
