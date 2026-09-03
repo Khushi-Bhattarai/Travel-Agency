@@ -43,6 +43,15 @@ function DestinationBooking() {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const todaysDate = new Date();
+    todaysDate.setHours(0, 0, 0, 0);
+
+    const yyyy = todaysDate.getFullYear();
+    const mm = String(todaysDate.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const dd = String(todaysDate.getDate()).padStart(2, '0');
+
+    const minDate = `${yyyy}-${mm}-${dd}`;
+
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -130,19 +139,21 @@ function DestinationBooking() {
 
         if (name === "travellers") {
 
+            const numberOfTravellers = Number(value);
+
             if (value.trim() === "") {
                 setErrors(prevErrors => ({
                     ...prevErrors,
                     travellers: 'Number of traveller cannot be blank'
                 }))
             }
-            else if (value <= 0) {
+            else if (numberOfTravellers < 1) {
                 setErrors(prevErrors => ({
                     ...prevErrors,
                     travellers: 'Atleast 1 traveller is required'
                 }))
             }
-            else if (value > 30) {
+            else if (numberOfTravellers > 30) {
                 setErrors(prevErrors => ({
                     ...prevErrors,
                     travellers: 'Number of travellers shouldnot be more than 30'
@@ -197,8 +208,7 @@ function DestinationBooking() {
         const selectedDate = new Date(formData.travelDate);
         selectedDate.setHours(0, 0, 0, 0);
 
-        const todaysDate = new Date();
-        todaysDate.setHours(0, 0, 0, 0);
+        const numberOfTravellers = Number(formData.travellers);
 
         if (formData.name.trim() === "") {
             errors.name = "Name cannot be blank";
@@ -231,11 +241,11 @@ function DestinationBooking() {
             errors.travellers = "Number of traveller cannot be blank"
         }
 
-        else if (formData.travellers <= 0) {
+        else if (numberOfTravellers < 1) {
             errors.travellers = "Atleast 1 traveller is required";
         }
 
-        else if (formData.travellers > 30) {
+        else if (numberOfTravellers > 30) {
             errors.travellers = "Number of travellers shouldnot be more than 30";
         }
 
@@ -370,7 +380,8 @@ function DestinationBooking() {
                                 id="travellers"
                                 name="travellers"
                                 type="number"
-                                // min={1}
+                                min={1}
+                                max={30}
                                 value={formData.travellers}
                                 onChange={handleChange}
                                 placeholder="Enter number of travellers"
@@ -392,6 +403,7 @@ function DestinationBooking() {
                                 id="travelDate"
                                 name="travelDate"
                                 type="date"
+                                min={minDate}
                                 value={formData.travelDate}
                                 onChange={handleChange}
                                 placeholder="select travel date"
