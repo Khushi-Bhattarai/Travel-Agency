@@ -47,7 +47,7 @@
 
 }
 
-.booking-form .bookForm{
+.booking-form .bookForm {
     display: grid;
     grid-template-columns: 180px 1fr;
     align-items: center;
@@ -101,11 +101,38 @@
     box-shadow: var(--shadow);
 }
 
-.booking-form .formDesc{
+.booking-form .formDesc {
     display: flex;
-    flex-direction: column ;
+    flex-direction: column;
 }
 
-.booking-form .formDesc p{
-    color:red;
+.booking-form .formDesc p {
+    color: red;
 }
+
+.booking-form-wrapper {
+    position: relative;
+}
+
+.booking-success {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(4px);
+
+    z-index: 10;
+}
+
+/* .booking-success p {
+    padding: 1.5rem 2rem;
+    background: rgb(19, 19, 19);
+    color: white;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+} */

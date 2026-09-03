@@ -41,6 +41,8 @@ function DestinationBooking() {
     }
     const [errors, setErrors] = useState(initalerrors);
 
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -134,7 +136,7 @@ function DestinationBooking() {
                     travellers: 'Number of traveller cannot be blank'
                 }))
             }
-            else  if (value <= 0) {
+            else if (value <= 0) {
                 setErrors(prevErrors => ({
                     ...prevErrors,
                     travellers: 'Atleast 1 traveller is required'
@@ -146,8 +148,8 @@ function DestinationBooking() {
                     travellers: 'Number of travellers shouldnot be more than 30'
                 }))
             }
-            else{
-                 setErrors(prevErrors => ({
+            else {
+                setErrors(prevErrors => ({
                     ...prevErrors,
                     travellers: ''
                 }));
@@ -174,8 +176,8 @@ function DestinationBooking() {
                     travelDate: 'Travel date cannot be in the past days'
                 }))
             }
-            else{
-                 setErrors(prevErrors => ({
+            else {
+                setErrors(prevErrors => ({
                     ...prevErrors,
                     travelDate: ''
                 }))
@@ -263,7 +265,16 @@ function DestinationBooking() {
             console.log("The form field is invalid");
             return;
         }
-        console.log(`The form field is valid`, formData);
+        setIsSubmitted(true);
+        {
+            isSubmitted && (
+                <p>Your booking request has been submitted successfully! </p>
+            )
+        }
+
+        setTimeout(() => {
+            setIsSubmitted(false);
+        }, 2000);
 
         setFormData(initialformData);
         setErrors(initalerrors);
@@ -282,135 +293,146 @@ function DestinationBooking() {
                 <p>Price: Rs. {destination.price.toLocaleString()}</p>
             </div>
 
-            <form
-                className="booking-form"
-                onSubmit={handleSubmit}>
+            <div className="booking-form-wrapper">
+                <form
+                    className="booking-form"
+                    onSubmit={handleSubmit}>
 
 
-                <div className="bookForm form-name">
-                    <label htmlFor="name">Full Name</label>
-                    <div className="formDesc">
-                        <input
-                            id="name"
-                            name="name"
-                            type="text"
-                            value={formData.name}
-                            onChange={handleChange}
-                            autoComplete="name"
-                            placeholder="Enter your full name"
-                        />
+                    <div className="bookForm form-name">
+                        <label htmlFor="name">Full Name</label>
+                        <div className="formDesc">
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                value={formData.name}
+                                onChange={handleChange}
+                                autoComplete="name"
+                                placeholder="Enter your full name"
+                            />
 
-                        {errors.name && (
-                            <p> {errors.name} </p>
-                        )}
+                            {errors.name && (
+                                <p> {errors.name} </p>
+                            )}
 
+                        </div>
                     </div>
-                </div>
 
-                <div className="bookForm form-email">
-                    <label htmlFor="email">Email</label>
-                    <div className="formDesc">
-                        <input
-                            id="email"
-                            name="email"
-                            type="text"
-                            value={formData.email}
-                            onChange={handleChange}
-                            autoComplete="email"
-                            placeholder="Enter your email"
-                        />
+                    <div className="bookForm form-email">
+                        <label htmlFor="email">Email</label>
+                        <div className="formDesc">
+                            <input
+                                id="email"
+                                name="email"
+                                type="text"
+                                value={formData.email}
+                                onChange={handleChange}
+                                autoComplete="email"
+                                placeholder="Enter your email"
+                            />
 
-                        {
-                            errors.email && (
-                                <p>{errors.email}</p>
-                            )
-                        }
+                            {
+                                errors.email && (
+                                    <p>{errors.email}</p>
+                                )
+                            }
 
+                        </div>
                     </div>
-                </div>
 
-                <div className="bookForm form-phone">
-                    <label htmlFor="phone">Phone Number</label>
-                    <div className="formDesc">
-                        <input
-                            id="phone"
-                            name="phone"
-                            type="tel"
-                            value={formData.phone}
-                            onChange={handleChange}
-                            autoComplete="phone"
-                            placeholder="Enter your phone number"
-                        />
+                    <div className="bookForm form-phone">
+                        <label htmlFor="phone">Phone Number</label>
+                        <div className="formDesc">
+                            <input
+                                id="phone"
+                                name="phone"
+                                type="tel"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                autoComplete="phone"
+                                placeholder="Enter your phone number"
+                            />
 
-                        {
-                            errors.phone && (
-                                <p>{errors.phone}</p>
-                            )
-                        }
+                            {
+                                errors.phone && (
+                                    <p>{errors.phone}</p>
+                                )
+                            }
 
+                        </div>
                     </div>
-                </div>
 
-                <div className="bookForm form-travellers">
-                    <label htmlFor="travellers">Number of Travellers</label>
-                    <div className="formDesc">
-                        <input
-                            id="travellers"
-                            name="travellers"
-                            type="number"
-                            // min={1}
-                            value={formData.travellers}
-                            onChange={handleChange}
-                            placeholder="Enter number of travellers"
-                        />
+                    <div className="bookForm form-travellers">
+                        <label htmlFor="travellers">Number of Travellers</label>
+                        <div className="formDesc">
+                            <input
+                                id="travellers"
+                                name="travellers"
+                                type="number"
+                                // min={1}
+                                value={formData.travellers}
+                                onChange={handleChange}
+                                placeholder="Enter number of travellers"
+                            />
 
-                        {
-                            errors.travellers && (
-                                <p>{errors.travellers}</p>
-                            )
-                        }
+                            {
+                                errors.travellers && (
+                                    <p>{errors.travellers}</p>
+                                )
+                            }
 
+                        </div>
                     </div>
-                </div>
 
-                <div className="bookForm form-travelDate">
-                    <label htmlFor="travelDate">Travel Date</label>
-                    <div className="formDesc">
-                        <input
-                            id="travelDate"
-                            name="travelDate"
-                            type="date"
-                            value={formData.travelDate}
-                            onChange={handleChange}
-                            placeholder="select travel date"
-                        />
+                    <div className="bookForm form-travelDate">
+                        <label htmlFor="travelDate">Travel Date</label>
+                        <div className="formDesc">
+                            <input
+                                id="travelDate"
+                                name="travelDate"
+                                type="date"
+                                value={formData.travelDate}
+                                onChange={handleChange}
+                                placeholder="select travel date"
+                            />
 
-                        {
-                            errors.travelDate && (
-                                <p>{errors.travelDate}</p>
-                            )
-                        }
+                            {
+                                errors.travelDate && (
+                                    <p>{errors.travelDate}</p>
+                                )
+                            }
 
+                        </div>
                     </div>
-                </div>
 
-                <div className="bookForm form-requests">
-                    <label htmlFor="requests">Special requests</label>
-                    <textarea
-                        id="requests"
-                        name="requests"
-                        value={formData.requests}
-                        onChange={handleChange}
-                        placeholder="Enter any special requests"
-                        rows="4"
-                    />
-                </div>
+                    <div className="bookForm form-requests">
+                        <label htmlFor="requests">Special requests</label>
+                        <textarea
+                            id="requests"
+                            name="requests"
+                            value={formData.requests}
+                            onChange={handleChange}
+                            placeholder="Enter any special requests"
+                            rows="4"
+                        />
+                    </div>
 
-                <button className="form-submit">
-                    Submit
-                </button>
+                    <button className="form-submit">
+                        Submit
+                    </button>
 
-            </form>
+                </form>
+
+                {
+                    isSubmitted && (
+                        <div className="booking-success">
+                            <p>Your booking request has been submitted successfully! </p>
+                        </div>
+                    )
+                }
+
+            </div>
 
         </section>
     );
