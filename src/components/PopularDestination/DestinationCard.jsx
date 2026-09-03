@@ -55,10 +55,10 @@ function DestinationCard({ destination }) {
                     )}
                 </div>
 
-
-                <p>Rs. {price.toLocaleString()} </p>
-
-                <p>Duration: {duration} days</p>
+                <div className="destination-wrapper">
+                    <p>Duration: {duration} days</p>
+                    <p>Rs. {price.toLocaleString()} </p>
+                </div>
 
                 <div className="viewBook">
                     <Link to={`/destinations/${destination.id}`}>

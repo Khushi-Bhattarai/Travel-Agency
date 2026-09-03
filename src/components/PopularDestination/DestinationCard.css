@@ -86,3 +86,8 @@
 .viewBook a:hover {
     color: darkslategrey;
 }
+
+.destination-wrapper{
+    display: flex;
+    justify-content: space-between;
+}

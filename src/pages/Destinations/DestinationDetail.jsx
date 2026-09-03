@@ -1,5 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import Destination from "../../components/PopularDestination/destination";
+import './DestinationDetail.css';
 
 function DestinationDetail() {
 
@@ -13,7 +14,7 @@ function DestinationDetail() {
 
     return (
 
-        <section>
+        <section className="destination-detail">
 
             <h1>{destination.country}</h1>
 
@@ -22,18 +23,20 @@ function DestinationDetail() {
                 alt={destination.country}
             />
 
-            <p>{destination.description}</p>
+            <div className="destination-info">
+                <p>{destination.description}</p>
 
-            <p>Rating: {destination.rating}</p>
+                <p>Rating: {destination.rating}</p>
 
-            <p>Rs. {destination.price.toLocaleString()}</p>
+                <p>Rs. {destination.price.toLocaleString()}</p>
 
-            <p>Duration: {destination.duration} days</p>
+                <p>Duration: {destination.duration} days</p>
 
-            <Link 
-            to={`/booking/destinations/${destinationId}`}>
-                Book Now
-            </Link>
+                <Link
+                    to={`/booking/destinations/${destinationId}`}>
+                    Book Now
+                </Link>
+            </div>
 
         </section >
 

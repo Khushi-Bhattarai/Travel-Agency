@@ -34,11 +34,23 @@
 .tour-card img {
     width: 100%;
     height: auto;
-    aspect-ratio: 16/9;
+    aspect-ratio: 3/1;
+    overflow: hidden;
 }
 
-.tour-card .card-content button {
-    width: fit-content;
+.tour-buttons {
+    display: flex;
     margin-top: auto;
-    align-self: center;
+    justify-content: space-between;
+}
+
+.tour-buttons a {
+    display: inline-block;
+    text-decoration: none;
+    color: #000;
+    padding-top: 6px;
+}
+
+.tour-buttons a:hover {
+    color: darkslategrey;
 }

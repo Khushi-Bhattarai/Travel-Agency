@@ -1,0 +1,70 @@
+.destination-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+
+    max-width: 1100px;
+    padding: var(--space-xl) var(--space-lg);
+    margin: auto;
+
+    align-items: center;
+}
+
+/* Title */
+.destination-detail h1 {
+    grid-column: 1 / -1;
+    text-align: center;
+    margin-bottom: var(--space-md);
+}
+
+/* Image */
+.destination-detail img {
+    width: 100%;
+    aspect-ratio: 9/7;
+    object-fit: cover;
+    border-radius: var(--space-sm);
+}
+
+/* Description and package information */
+.destination-detail p {
+    margin-bottom: var(--space-sm);
+    line-height: 1.6;
+}
+
+/* Book Now link */
+.destination-detail a {
+    display: inline-block;
+    margin-top: var(--space-md);
+    padding: var(--space-sm) var(--space-lg);
+
+    text-decoration: none;
+    background: var(--primary);
+    color: white;
+
+    border-radius: var(--space-2xs);
+
+    transition:
+        transform 200ms ease,
+        box-shadow 200ms ease;
+}
+
+.destination-detail a:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+}
+
+
+/* Tablet / Mobile */
+@media (max-width: 768px) {
+
+    .destination-detail {
+        grid-template-columns: 1fr;
+        padding: var(--space-lg);
+        gap: var(--space-lg);
+    }
+
+    .destination-detail h1 {
+        grid-column: auto;
+    }
+
+}

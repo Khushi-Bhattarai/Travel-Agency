@@ -276,11 +276,6 @@ function DestinationBooking() {
             return;
         }
         setIsSubmitted(true);
-        {
-            isSubmitted && (
-                <p>Your booking request has been submitted successfully! </p>
-            )
-        }
 
         setTimeout(() => {
             setIsSubmitted(false);

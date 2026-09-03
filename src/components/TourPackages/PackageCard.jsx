@@ -23,8 +23,10 @@ function PackageCard({ tourPackage }) {
                     <p>Rs. {price.toLocaleString()}</p>
                     <p>{duration} days</p>
                 </div>
-                <Link to={`/booking/tourPackages/${tourPackage.id}`}>Book-Now</Link>
-                <Link to={`/tourPackages/${tourPackage.id}`}>View details</Link>
+                <div className="tour-buttons">
+                    <Link to={`/tours/${tourPackage.id}`}>View Details</Link>
+                    <Link to={`/booking/tours/${tourPackage.id}`}>Book Now</Link>
+                </div>
             </div>
         </article>
     )
