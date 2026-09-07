@@ -172,9 +172,6 @@ function DestinationBooking() {
             const selectedDate = new Date(value);
             selectedDate.setHours(0, 0, 0, 0);
 
-            const todaysDate = new Date();
-            todaysDate.setHours(0, 0, 0, 0);
-
             if (value.trim() === "") {
                 setErrors(prevErrors => ({
                     ...prevErrors,
