@@ -9,30 +9,199 @@ function TourPackageBooking() {
 
     const tourPackage = TourPackagesData.find((item) => item.id === tourPackageId);
 
-    const [formData, setFormData] = useState({
-
+    const initialFormData = {
         name: '',
         email: '',
         phone: '',
-        travellers: 1,
+        travellers: '',
         travelDate: '',
         requests: ''
+    }
+    const [formData, setFormData] = useState(initialFormData);
 
-    });
+    const initialErrors = {
+        name: '',
+        email: '',
+        phone: '',
+        travellers: '',
+        travelDate: '',
+        requests: ''
+    }
+    const [errors, setErrors] = useState(initialErrors);
+
+    const namePattern = /^[A-Za-z\s]+$/;
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const phonePattern = /^(98|97)\d{8}$/;
+
+    const todaysDate = new Date();
+    todaysDate.setHours(0, 0, 0, 0);
+
+    const yyyy = todaysDate.getFullYear();
+    const mm = String(todaysDate.getMonth() + 1).padStart(2, '0');
+    const dd = String(todaysDate.getDate()).padStart(2, '0');
+
+    const minDate = `${yyyy}-${mm}-${dd}`;
+
+    const [isSubmitted, setIsSubmitted] = useState(false);
+
+    function validateName(value) {
+
+        const trimmedValue = value.trim();
+
+        if (trimmedValue === "") {
+            return 'Name cannot be blank'
+        }
+        else if (trimmedValue.length < 3) {
+            return 'Name should  contain atleast 3 characters'
+        }
+        else if (!namePattern.test(trimmedValue)) {
+            return 'Name can only contain letters and in between spaces'
+        }
+
+        return '';
+    }
+
+    function validateEmail(value) {
+
+        const trimmedValue = value.trim();
+
+        if (trimmedValue === "") {
+            return 'Email cannot be blank'
+        }
+
+        if (!emailPattern.test(trimmedValue)) {
+            return 'Enter a valid email address'
+        }
+
+        return '';
+    }
+
+    function validatePhone(value) {
+        const trimmedValue = value.trim();
+
+        if (trimmedValue === "") {
+            return 'Phone number cannot be blank'
+        }
+
+        if (!phonePattern.test(trimmedValue)) {
+            return 'Phone number should start with 97/98 and it must be of 10 digits'
+        }
+
+        return '';
+    }
+
+    function validateTravellers(value) {
+        
+        if (value.trim() === "") {
+            return 'Number of traveller cannot be blank'
+        }
+        
+        const numberOfTravellers = Number(value);
+       
+        if (numberOfTravellers < 1) {
+            return 'Atleast 1 traveller is required'
+        }
+
+        if (numberOfTravellers > 30) {
+            return 'Number of travellers shouldnot be more than 30'
+        }
+
+        return '';
+    }
+
+    function validateDate(value) {
+
+        
+        if(value.trim() === ""){
+            return 'Travel date is required'
+        }
+        
+        const selectedDate = new Date(value);
+        selectedDate.setHours(0, 0, 0, 0);
+        
+        if(selectedDate < todaysDate){
+            return 'Travel date cannot be in the past days'
+        }
+
+        return '';
+    }
+
+    function validateForm(){
+
+        const newErrors = {
+
+            name: validateName(formData.name),
+            email: validateEmail(formData.email),
+            phone: validatePhone(formData.phone),
+            travellers: validateTravellers(formData.travellers),
+            travelDate: validateDate(formData.travelDate),
+            requests: ''
+        }
+
+        setErrors(newErrors);
+
+        const hasErrors = Object.values(newErrors).some((error) => error !== "");
+        return !hasErrors;
+    }
 
     function handleChange(e) {
+
         const { name, value } = e.target;
 
-        setFormData({
-            ...formData,
+        let errorMessage = '';
+
+        setFormData(prevForm => ({
+            ...prevForm,
             [name]: value
-        });
+        }));
+
+        if (name === "name") {
+            errorMessage = validateName(value);
+        }
+
+        if (name === "email") {
+            errorMessage = validateEmail(value);
+        }
+
+        if (name === "phone") {
+            errorMessage = validatePhone(value);
+        }
+
+        if (name === "travellers") {
+            errorMessage = validateTravellers(value);
+        }
+
+        if (name === "travelDate"){
+            errorMessage = validateDate(value);
+        }
+
+        setErrors(prevErrors => ({
+            ...prevErrors,
+            [name]: errorMessage
+        }));
 
     }
 
     function handleSubmit(e) {
+
         e.preventDefault();
-        console.log(formData);
+
+        const isFormValid = validateForm();
+
+        if(!isFormValid){
+            return;
+        }
+
+        setIsSubmitted(true);
+
+        setTimeout(() => {
+            setIsSubmitted(false);
+        }, 2000);
+
+        setFormData(initialFormData);
+        setErrors(initialErrors);
     }
 
     if (!tourPackage) {
@@ -51,97 +220,148 @@ function TourPackageBooking() {
                 <p>Price: Rs. {tourPackage.price.toLocaleString()}</p>
             </div>
 
-            <form
-                className="booking-form"
-                onSubmit={handleSubmit}>
+             <div className="booking-form-wrapper">
+                <form
+                    className="booking-form"
+                    onSubmit={handleSubmit}>
 
 
-                <div className="bookForm form-name">
-                    <label htmlFor="name">Full Name</label>
-                    <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        value={formData.name}
-                        onChange={handleChange}
-                        autoComplete="name"
-                        placeholder="Enter your full name"
-                        required
-                    />
-                </div>
+                    <div className="bookForm form-name">
+                        <label htmlFor="name">Full Name</label>
+                        <div className="formDesc">
+                            <input
+                                id="name"
+                                name="name"
+                                type="text"
+                                value={formData.name}
+                                onChange={handleChange}
+                                autoComplete="name"
+                                placeholder="Enter your full name"
+                            />
 
-                <div className="bookForm form-email">
-                    <label htmlFor="email">Email</label>
-                    <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        autoComplete="email"
-                        placeholder="Enter your email"
-                        required
-                    />
-                </div>
+                            {errors.name && (
+                                <p> {errors.name} </p>
+                            )}
 
-                <div className="bookForm form-phone">
-                    <label htmlFor="phone">Phone Number</label>
-                    <input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        autoComplete="phone"
-                        placeholder="Enter your phone number"
-                        required
-                    />
-                </div>
+                        </div>
+                    </div>
 
-                <div className="bookForm form-travellers">
-                    <label htmlFor="travellers">Number of Travellers</label>
-                    <input
-                        id="travellers"
-                        name="travellers"
-                        type="number"
-                        min={1}
-                        value={formData.travellers}
-                        onChange={handleChange}
-                        placeholder="Enter number of travellers"
-                        required
-                    />
-                </div>
+                    <div className="bookForm form-email">
+                        <label htmlFor="email">Email</label>
+                        <div className="formDesc">
+                            <input
+                                id="email"
+                                name="email"
+                                type="text"
+                                value={formData.email}
+                                onChange={handleChange}
+                                autoComplete="email"
+                                placeholder="Enter your email"
+                            />
 
-                <div className="bookForm form-travelDate">
-                    <label htmlFor="travelDate">Travel Date</label>
-                    <input
-                        id="travelDate"
-                        name="travelDate"
-                        type="date"
-                        value={formData.travelDate}
-                        onChange={handleChange}
-                        placeholder="select travel date"
-                        required
-                    />
-                </div>
+                            {
+                                errors.email && (
+                                    <p>{errors.email}</p>
+                                )
+                            }
 
-                <div className="bookForm form-requests">
-                    <label htmlFor="requests">Special requests</label>
-                    <textarea
-                        id="requests"
-                        name="requests"
-                        value={formData.requests}
-                        onChange={handleChange}
-                        placeholder="Enter any special requests"
-                        rows="4"
-                    />
-                </div>
+                        </div>
+                    </div>
 
-                <button className="form-submit">
-                    Submit
-                </button>
+                    <div className="bookForm form-phone">
+                        <label htmlFor="phone">Phone Number</label>
+                        <div className="formDesc">
+                            <input
+                                id="phone"
+                                name="phone"
+                                type="tel"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                autoComplete="tel"
+                                placeholder="Enter your phone number"
+                            />
 
-            </form>
+                            {
+                                errors.phone && (
+                                    <p>{errors.phone}</p>
+                                )
+                            }
+
+                        </div>
+                    </div>
+
+                    <div className="bookForm form-travellers">
+                        <label htmlFor="travellers">Number of Travellers</label>
+                        <div className="formDesc">
+                            <input
+                                id="travellers"
+                                name="travellers"
+                                type="number"
+                                min={1}
+                                max={30}
+                                value={formData.travellers}
+                                onChange={handleChange}
+                                placeholder="Enter number of travellers"
+                            />
+
+                            {
+                                errors.travellers && (
+                                    <p>{errors.travellers}</p>
+                                )
+                            }
+
+                        </div>
+                    </div>
+
+                    <div className="bookForm form-travelDate">
+                        <label htmlFor="travelDate">Travel Date</label>
+                        <div className="formDesc">
+                            <input
+                                id="travelDate"
+                                name="travelDate"
+                                type="date"
+                                min={minDate}
+                                value={formData.travelDate}
+                                onChange={handleChange}
+                                placeholder="select travel date"
+                            />
+
+                            {
+                                errors.travelDate && (
+                                    <p>{errors.travelDate}</p>
+                                )
+                            }
+
+                        </div>
+                    </div>
+
+                    <div className="bookForm form-requests">
+                        <label htmlFor="requests">Special requests</label>
+                        <textarea
+                            id="requests"
+                            name="requests"
+                            value={formData.requests}
+                            onChange={handleChange}
+                            placeholder="Enter any special requests"
+                            rows="4"
+                        />
+                    </div>
+
+                    <button className="form-submit">
+                        Submit
+                    </button>
+
+                </form>
+
+                {
+                    isSubmitted && (
+                        <div className="booking-success">
+                            <p>Your booking request has been submitted successfully! </p>
+                        </div>
+                    )
+                }
+
+            </div>
 
         </section>
     );
