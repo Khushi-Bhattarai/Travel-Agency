@@ -137,3 +137,31 @@
     text-align: center;
     font-weight: 600;
 } */
+
+.booking-form input.input-error,
+.booking-form textarea.input-error {
+    border: 2px solid red;
+}
+
+.booking-form input.input-success,
+.booking-form textarea.input-success {
+    border: 2px solid green;
+}
+
+.textarea-wrapper {
+    position: relative;
+}
+
+.character-count {
+    position: absolute;
+    bottom: 8px;
+    right: 10px;
+    font-size: 0.8rem;
+    color: #777;
+    background: white;
+}
+
+.textarea-wrapper textarea {
+    padding: 10px;
+    padding-bottom: 30px;
+}

@@ -46,6 +46,17 @@ function TourPackageBooking() {
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    const initialTouched = {
+
+        name: false,
+        email: false,
+        phone: false,
+        travellers: false,
+        travelDate: false,
+        requests: false
+    }
+    const [touched, setTouched] = useState(initialTouched);
+
     function validateName(value) {
 
         const trimmedValue = value.trim();
@@ -93,13 +104,13 @@ function TourPackageBooking() {
     }
 
     function validateTravellers(value) {
-        
+
         if (value.trim() === "") {
             return 'Number of traveller cannot be blank'
         }
-        
+
         const numberOfTravellers = Number(value);
-       
+
         if (numberOfTravellers < 1) {
             return 'Atleast 1 traveller is required'
         }
@@ -113,22 +124,22 @@ function TourPackageBooking() {
 
     function validateDate(value) {
 
-        
-        if(value.trim() === ""){
+
+        if (value.trim() === "") {
             return 'Travel date is required'
         }
-        
+
         const selectedDate = new Date(value);
         selectedDate.setHours(0, 0, 0, 0);
-        
-        if(selectedDate < todaysDate){
+
+        if (selectedDate < todaysDate) {
             return 'Travel date cannot be in the past days'
         }
 
         return '';
     }
 
-    function validateForm(){
+    function validateForm() {
 
         const newErrors = {
 
@@ -150,12 +161,25 @@ function TourPackageBooking() {
 
         const { name, value } = e.target;
 
-        let errorMessage = '';
-
         setFormData(prevForm => ({
             ...prevForm,
             [name]: value
         }));
+
+
+    }
+
+    function handleBlur(e) {
+
+        const { name, value } = e.target;
+
+        setTouched((prevTouch) => ({
+            ...prevTouch,
+            [name]: true
+        }));
+
+        let errorMessage = '';
+
 
         if (name === "name") {
             errorMessage = validateName(value);
@@ -173,7 +197,7 @@ function TourPackageBooking() {
             errorMessage = validateTravellers(value);
         }
 
-        if (name === "travelDate"){
+        if (name === "travelDate") {
             errorMessage = validateDate(value);
         }
 
@@ -188,9 +212,18 @@ function TourPackageBooking() {
 
         e.preventDefault();
 
+        setTouched({
+            name: true,
+            email: true,
+            phone: true,
+            travellers: true,
+            travelDate: true,
+            requests: true
+        })
+
         const isFormValid = validateForm();
 
-        if(!isFormValid){
+        if (!isFormValid) {
             return;
         }
 
@@ -202,6 +235,20 @@ function TourPackageBooking() {
 
         setFormData(initialFormData);
         setErrors(initialErrors);
+        setTouched(initialTouched);
+    }
+
+    function getInputClass(FieldName) {
+
+        if (!touched[FieldName]) {
+            return '';
+        }
+
+        if (errors[FieldName]) {
+            return 'input-error';
+        }
+
+        return 'input-success';
     }
 
     if (!tourPackage) {
@@ -220,10 +267,12 @@ function TourPackageBooking() {
                 <p>Price: Rs. {tourPackage.price.toLocaleString()}</p>
             </div>
 
-             <div className="booking-form-wrapper">
+            <div className="booking-form-wrapper">
                 <form
                     className="booking-form"
-                    onSubmit={handleSubmit}>
+                    onSubmit={handleSubmit}
+                    noValidate
+                >
 
 
                     <div className="bookForm form-name">
@@ -235,11 +284,13 @@ function TourPackageBooking() {
                                 type="text"
                                 value={formData.name}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 autoComplete="name"
                                 placeholder="Enter your full name"
+                                className={getInputClass('name')}
                             />
 
-                            {errors.name && (
+                            {touched.name && errors.name && (
                                 <p> {errors.name} </p>
                             )}
 
@@ -255,12 +306,14 @@ function TourPackageBooking() {
                                 type="text"
                                 value={formData.email}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 autoComplete="email"
                                 placeholder="Enter your email"
+                                className={getInputClass('email')}
                             />
 
                             {
-                                errors.email && (
+                                touched.email && errors.email && (
                                     <p>{errors.email}</p>
                                 )
                             }
@@ -277,12 +330,14 @@ function TourPackageBooking() {
                                 type="tel"
                                 value={formData.phone}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 autoComplete="tel"
                                 placeholder="Enter your phone number"
+                                className={getInputClass('phone')}
                             />
 
                             {
-                                errors.phone && (
+                                touched.phone && errors.phone && (
                                     <p>{errors.phone}</p>
                                 )
                             }
@@ -301,11 +356,13 @@ function TourPackageBooking() {
                                 max={30}
                                 value={formData.travellers}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 placeholder="Enter number of travellers"
+                                className={getInputClass('travellers')}
                             />
 
                             {
-                                errors.travellers && (
+                                touched.travellers && errors.travellers && (
                                     <p>{errors.travellers}</p>
                                 )
                             }
@@ -323,11 +380,13 @@ function TourPackageBooking() {
                                 min={minDate}
                                 value={formData.travelDate}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 placeholder="select travel date"
+                                className={getInputClass('travelDate')}
                             />
 
                             {
-                                errors.travelDate && (
+                                touched.travelDate && errors.travelDate && (
                                     <p>{errors.travelDate}</p>
                                 )
                             }
@@ -337,14 +396,23 @@ function TourPackageBooking() {
 
                     <div className="bookForm form-requests">
                         <label htmlFor="requests">Special requests</label>
-                        <textarea
-                            id="requests"
-                            name="requests"
-                            value={formData.requests}
-                            onChange={handleChange}
-                            placeholder="Enter any special requests"
-                            rows="4"
-                        />
+
+                        <div className="textarea-wrapper">
+                            <textarea
+                                id="requests"
+                                name="requests"
+                                value={formData.requests}
+                                onChange={handleChange}
+                                placeholder="Enter any special requests"
+                                rows="4"
+                                maxLength={500}
+                            />
+
+                            <span className="character-count">
+                                {formData.requests.length}/500
+                            </span>
+
+                        </div>
                     </div>
 
                     <button className="form-submit">

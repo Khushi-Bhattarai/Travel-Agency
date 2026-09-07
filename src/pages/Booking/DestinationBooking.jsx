@@ -22,7 +22,7 @@ function DestinationBooking() {
         name: '',
         email: '',
         phone: '',
-        travellers: 1,
+        travellers: '',
         travelDate: '',
         requests: ''
 
@@ -52,6 +52,27 @@ function DestinationBooking() {
 
     const minDate = `${yyyy}-${mm}-${dd}`;
 
+    const initialTouched = {
+        name: false,
+        email: false,
+        phone: false,
+        travellers: false,
+        travelDate: false,
+        requests: false
+    }
+    const [touched, setTouched] = useState(initialTouched);
+
+    function getInputClass(FieldName) {
+        if (!touched[FieldName]) {
+            return '';
+        }
+
+        if (errors[FieldName]) {
+            return 'input-error';
+        }
+
+        return 'input-success';
+    }
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -60,6 +81,18 @@ function DestinationBooking() {
             ...formData,
             [name]: value
         });
+
+
+    }
+
+    function handleBlur(e) {
+
+        const { name, value } = e.target;
+
+        setTouched((prevTouched) => ({
+            ...prevTouched,
+            [name]: true
+        }));
 
         if (name === "name") {
 
@@ -89,7 +122,6 @@ function DestinationBooking() {
                 }));
             }
         }
-
 
         if (name === "email") {
 
@@ -193,11 +225,6 @@ function DestinationBooking() {
         }
     }
 
-    if (!destination) {
-        return <h1>Destination not found</h1>;
-    }
-
-
     function validateForm() {
 
         const errors = {};
@@ -266,12 +293,21 @@ function DestinationBooking() {
 
         e.preventDefault();
 
+        setTouched({
+            name: true,
+            email: true,
+            phone: true,
+            travellers: true,
+            travelDate: true,
+            requests: true
+        })
+
         const isValid = validateForm();
 
         if (!isValid) {
-            console.log("The form field is invalid");
             return;
         }
+
         setIsSubmitted(true);
 
         setTimeout(() => {
@@ -280,8 +316,12 @@ function DestinationBooking() {
 
         setFormData(initialformData);
         setErrors(initalerrors);
+        setTouched(initialTouched);
     }
 
+    if (!destination) {
+        return <h1>Destination not found</h1>;
+    }
 
     return (
         <section className="booking">
@@ -310,11 +350,13 @@ function DestinationBooking() {
                                 type="text"
                                 value={formData.name}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 autoComplete="name"
                                 placeholder="Enter your full name"
+                                className={getInputClass('name')}
                             />
 
-                            {errors.name && (
+                            {touched.name && errors.name && (
                                 <p> {errors.name} </p>
                             )}
 
@@ -330,12 +372,14 @@ function DestinationBooking() {
                                 type="text"
                                 value={formData.email}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 autoComplete="email"
                                 placeholder="Enter your email"
+                                className={getInputClass('email')}
                             />
 
                             {
-                                errors.email && (
+                                touched.email && errors.email && (
                                     <p>{errors.email}</p>
                                 )
                             }
@@ -352,12 +396,14 @@ function DestinationBooking() {
                                 type="tel"
                                 value={formData.phone}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 autoComplete="phone"
                                 placeholder="Enter your phone number"
+                                className={getInputClass('phone')}
                             />
 
                             {
-                                errors.phone && (
+                                touched.phone && errors.phone && (
                                     <p>{errors.phone}</p>
                                 )
                             }
@@ -376,11 +422,13 @@ function DestinationBooking() {
                                 max={30}
                                 value={formData.travellers}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 placeholder="Enter number of travellers"
+                                className={getInputClass('travellers')}
                             />
 
                             {
-                                errors.travellers && (
+                                touched.travellers && errors.travellers && (
                                     <p>{errors.travellers}</p>
                                 )
                             }
@@ -398,11 +446,13 @@ function DestinationBooking() {
                                 min={minDate}
                                 value={formData.travelDate}
                                 onChange={handleChange}
+                                onBlur={handleBlur}
                                 placeholder="select travel date"
+                                className={getInputClass('travelDate')}
                             />
 
                             {
-                                errors.travelDate && (
+                                touched.travelDate && errors.travelDate && (
                                     <p>{errors.travelDate}</p>
                                 )
                             }
@@ -412,14 +462,24 @@ function DestinationBooking() {
 
                     <div className="bookForm form-requests">
                         <label htmlFor="requests">Special requests</label>
-                        <textarea
-                            id="requests"
-                            name="requests"
-                            value={formData.requests}
-                            onChange={handleChange}
-                            placeholder="Enter any special requests"
-                            rows="4"
-                        />
+
+                        <div className="textarea-wrapper">
+
+                            <textarea
+                                id="requests"
+                                name="requests"
+                                value={formData.requests}
+                                onChange={handleChange}
+                                placeholder="Enter any special requests"
+                                rows="4"
+                                maxLength={500}
+                            />
+
+                            <span className="character-count">
+                                {formData.requests.length}/500
+                            </span>
+
+                        </div>
                     </div>
 
                     <button className="form-submit">
