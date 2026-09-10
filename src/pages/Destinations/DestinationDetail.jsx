@@ -28,9 +28,9 @@ function DestinationDetail() {
 
                 <p>Rating: {destination.rating}</p>
 
-                <p>Rs. {destination.price.toLocaleString()}</p>
-
                 <p>Duration: {destination.duration} days</p>
+
+                <p>Price: Rs. {destination.price.toLocaleString()}</p>
 
                 <Link
                     to={`/booking/destinations/${destinationId}`}>

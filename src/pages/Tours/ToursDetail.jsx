@@ -27,9 +27,9 @@ function TourPackageDetail() {
 
                 <p>{tourPackage.description}</p>
 
-                <p>Rs. {tourPackage.price.toLocaleString()}</p>
-
                 <p>Duration: {tourPackage.duration} days</p>
+
+                <p>Price: Rs. {tourPackage.price.toLocaleString()}</p>
 
                 <Link
                     to={`/booking/tours/${tourPackageId}`}>

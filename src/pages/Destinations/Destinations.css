@@ -1,0 +1,8 @@
+.dest .cards{
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.pagination .active {
+  background-color: var(--primary);
+  color: white;
+}
