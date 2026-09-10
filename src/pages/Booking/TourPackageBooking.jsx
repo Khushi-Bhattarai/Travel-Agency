@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import TourPackagesData from "../../components/TourPackages/TourPackagesData";
+import TourPackagesData from "../../data/TourPackagesData";
 import './Booking.css';
 
 function TourPackageBooking() {

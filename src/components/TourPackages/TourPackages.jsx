@@ -1,4 +1,4 @@
-import TourPackagesData from "./TourPackagesData";
+import TourPackagesData from "../../data/TourPackagesData";
 import PackageCard from "./PackageCard";
 import SectionTitle from '../SectionTitle/SectionTitle';
 import './TourPackages.css'

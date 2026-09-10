@@ -1,4 +1,4 @@
-import Destination from './destination';
+import Destination from '../../data/destination';
 import DestinationCard from './DestinationCard';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import './PopularDestination.css';

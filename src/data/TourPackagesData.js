@@ -1,5 +1,5 @@
-import eiffelTower from '../../assets/eiffel_tower.avif';
-import canadaSea from '../../assets/canada_sea.avif';
+import eiffelTower from  '../assets/eiffel_tower.avif';
+import canadaSea from '../assets/canada_sea.avif';
 
 const TourPackagesData = [
 

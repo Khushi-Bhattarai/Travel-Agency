@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
-import Destination from "../../components/PopularDestination/destination";
+import Destination from "../../data/destination";
 import './Booking.css';
 
 function DestinationBooking() {
@@ -29,7 +29,7 @@ function DestinationBooking() {
     }
     const [formData, setFormData] = useState(initialformData);
 
-    const initalerrors = {
+    const initialerrors = {
 
         name: '',
         email: '',
@@ -39,7 +39,7 @@ function DestinationBooking() {
         requests: ''
 
     }
-    const [errors, setErrors] = useState(initalerrors);
+    const [errors, setErrors] = useState(initialerrors);
 
     const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -315,7 +315,7 @@ function DestinationBooking() {
         }, 2000);
 
         setFormData(initialformData);
-        setErrors(initalerrors);
+        setErrors(initialerrors);
         setTouched(initialTouched);
     }
 

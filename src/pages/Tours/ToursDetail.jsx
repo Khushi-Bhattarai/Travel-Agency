@@ -1,5 +1,5 @@
 import { useParams, Link } from "react-router-dom";
-import TourPackagesData from "../../components/TourPackages/TourPackagesData";
+import TourPackagesData from "../../data/TourPackagesData";
 import './ToursDetail.css';
 
 function TourPackageDetail() {
