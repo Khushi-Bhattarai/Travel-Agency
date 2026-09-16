@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Destination from '../../data/destination';
 import DestinationCard from '../../components/PopularDestination/DestinationCard';
 import Pagination from '../../components/Pagination/Pagination';
+import SectionTitle from '../../components/SectionTitle/SectionTitle';
 import './Destinations.css';
 
 function Destinations() {
@@ -15,8 +16,7 @@ function Destinations() {
   return (
     <main className="dest">
 
-      <h1>Explore Destinations </h1>
-      <p>Explore our amazing destinations and plan your dream vacation!</p>
+      <SectionTitle>Explore Destinations</SectionTitle>
 
       <div className="cards destinations">
         {

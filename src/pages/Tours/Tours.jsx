@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TourPackagesData from '../../data/TourPackagesData';
 import TourFeaturedCard from '../../components/TourPackages/PackageCard';
 import Pagination from '../../components/Pagination/Pagination';
+import SectionTitle from '../../components/SectionTitle/SectionTitle';
 import './Tours.css';
 
 function Tours() {
@@ -14,8 +15,8 @@ function Tours() {
 
     return (
         <main className='tourPack'>
-            <h1>Tour Packages</h1>
-            <p>Explore our available tour packages.</p>
+            <SectionTitle>Tour Packages</SectionTitle>
+     
             <div className="cards packages">
                 {
                     currentPagePackages.map((tourPackage) => {
