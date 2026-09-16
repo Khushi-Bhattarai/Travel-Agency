@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Destination from '../../data/destination';
 import DestinationCard from '../../components/PopularDestination/DestinationCard';
+import Pagination from '../../components/Pagination/Pagination';
 import './Destinations.css';
 
 function Destinations() {
@@ -30,37 +31,12 @@ function Destinations() {
         }
       </div>
 
-      <div className="pagination">
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+      />
 
-        <button
-          onClick={() => setCurrentPage((page) => page - 1)}
-          disabled={currentPage === 1}
-        >
-          Previous
-        </button>
-
-        {Array.from({ length: totalPages }).map((_, index) => {
-          return (
-
-            <button
-              key={index}
-              className={currentPage === index + 1 ? "active" : ""}
-              onClick={() => setCurrentPage(index + 1)}
-            >
-              {index + 1}
-            </button>
-          )
-
-        })}
-
-        <button
-          onClick={() => setCurrentPage((page) => page + 1)}
-          disabled={currentPage === totalPages}
-        >
-          Next
-        </button>
-
-      </div>
     </main>
   )
 }

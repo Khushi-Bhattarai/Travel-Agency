@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import TourPackagesData from '../../data/TourPackagesData';
 import TourFeaturedCard from '../../components/TourPackages/PackageCard';
+import Pagination from '../../components/Pagination/Pagination';
 import './Tours.css';
 
 function Tours() {
@@ -28,35 +29,13 @@ function Tours() {
                 }
             </div>
 
-            <div className="pagination">
+       
+            <Pagination 
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPageChange={setCurrentPage}
+            />
 
-                <button
-                    onClick={() => setCurrentPage((page) => page - 1)}
-                    disabled={currentPage === 1}
-                >
-                    Previous
-                </button>
-
-                {Array.from({ length: totalPages }).map((_, index) => {
-                    return (
-                        <button
-                            key={index}
-                            onClick={() => setCurrentPage(index + 1)}
-                            className={currentPage === index + 1 ? "active" : ""}
-                        >
-                            {index + 1}
-                        </button>
-                    )
-                })}
-
-                <button
-                    onClick={() => setCurrentPage((page) => page + 1)}
-                    disabled = {currentPage === totalPages}
-                >
-                    Next
-                </button>
-
-            </div>
         </main>
     );
 }

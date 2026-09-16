@@ -13,13 +13,13 @@ button {
     animation: slideLeft 400ms linear;
 }
 
-button:hover {
+button:not(:disabled):hover {
     cursor: pointer;
     color: lightsteelblue;
     background-color: var(--primary);
 }
 
-button:active {
+button:not(:disabled):active {
     box-shadow: var(--shadow);
     transform: translateY(2px);
 }
