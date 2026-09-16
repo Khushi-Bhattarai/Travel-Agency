@@ -1,28 +1,28 @@
-import FooterLinks from "./FooterLinks"
-import './Footer.css'
+import FooterLinks from "./FooterLinks";
+import './Footer.css';
 
 function Footer() {
 
     const quickLinks = [
 
         {
-            href: '#home',
-            label: 'Home'
+            label: 'Home',
+            path: '/',
         },
 
         {
-            href: '#popular-destination',
-            label: 'Destination'
+            label: 'Destination',
+            path: '/destinations',
         },
 
         {
-            href: '#tours',
-            label: 'Tours'
+            label: 'Tours',
+            path: '/tours',
         },
 
         {
-            href: '#contact',
-            label: 'Contact'
+            label: 'Contact',
+            path: '/contact',
         }
 
     ]
@@ -30,23 +30,23 @@ function Footer() {
     const support = [
 
         {
-            href: '#faq',
-            label: 'FAQs'
+            label: 'FAQs',
+            path: '#faq',
         },
 
         {
-            href: '#tos',
-            label: 'Terms of Service'
+            label: 'Terms of Service',
+            path: '#tos',
         },
 
         {
-            href: '#privacy',
-            label: 'Privacy'
+            label: 'Privacy',
+            path: '#privacy',
         },
 
         {
-            href: '#copyright',
-            label: 'Copyright'
+            label: 'Copyright',
+            path: '#copyright',
         }
 
     ]
