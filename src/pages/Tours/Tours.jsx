@@ -9,7 +9,7 @@ function Tours() {
     const itemsPerPage = 5;
     const startIndex = (currentPage - 1) * itemsPerPage;
     const currentPagePackages = TourPackagesData.slice(startIndex, startIndex + itemsPerPage);
-    const totalPage = Math.ceil(TourPackagesData.length / itemsPerPage);
+    const totalPages = Math.ceil(TourPackagesData.length / itemsPerPage);
 
     return (
         <main className='tourPack'>
@@ -37,7 +37,7 @@ function Tours() {
                     Previous
                 </button>
 
-                {Array.from({ length: totalPage }).map((_, index) => {
+                {Array.from({ length: totalPages }).map((_, index) => {
                     return (
                         <button
                             key={index}
@@ -51,7 +51,7 @@ function Tours() {
 
                 <button
                     onClick={() => setCurrentPage((page) => page + 1)}
-                    disabled = {currentPage === totalPage}
+                    disabled = {currentPage === totalPages}
                 >
                     Next
                 </button>
