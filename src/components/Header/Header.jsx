@@ -1,4 +1,4 @@
-import { NavLink, Link } from 'react-router-dom';
+import { NavLink, Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import Button from '../Button/Button';
 import { Wheat } from 'lucide-react';
@@ -30,16 +30,31 @@ function Header() {
         }
     ];
 
+    const location = useLocation();
+
+    const handleNavClick = (event, path) => {
+        if (location.pathname === path) {
+            event.preventDefault();
+            window.scroll(0, 0);
+            window.location.reload();
+        }
+    }
+
 
     return (
         <header>
             <div className="brand">
                 <div className="logo">
-                    <Link to={`/`}>
+                    <Link
+                        to={`/`}
+                        onClick={(event) => handleNavClick(event, '/')}>
                         <Wheat />
                     </Link>
                 </div>
-                <Link to={`/`}>
+                <Link
+                    to={`/`}
+                    onClick={(event) => handleNavClick(event, '/')}
+                >
                     <p>Vasudev Travel Agency</p>
                 </Link>
             </div>
@@ -53,6 +68,7 @@ function Header() {
                                         to={link.path}
                                         end={link.path === '/'}
                                         className={({ isActive }) => isActive ? "active" : ""}
+                                        onClick={(event) => handleNavClick(event, link.path)}
                                     >
                                         {link.label}
                                     </NavLink>
