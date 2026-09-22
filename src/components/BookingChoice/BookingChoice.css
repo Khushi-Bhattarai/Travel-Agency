@@ -1,0 +1,42 @@
+.booking-choice{
+    display: grid;
+    gap: var(--space-md);
+    text-align: center;
+    padding: var(--space-lg);
+}
+
+.booking-cards{
+    display: grid;
+    grid-template-columns: repeat(2,minmax(150px, 400px));
+    justify-content: center;
+    gap: var(--space-lg);
+    padding-top: var(--space-xs);
+}
+
+.destinationDesc,
+.tourDesc{
+    display: flex;
+    flex-direction: column;
+
+    border: 2px solid var(--primary);
+    border-radius: var(--space-md);
+
+    text-align: center;
+
+    gap: var(--space-lg);
+
+    padding: var(--space-xs);
+}
+
+.booking-cards a{
+    text-decoration: none;
+    color:black;
+    font-size: 18px;
+}
+
+@media (max-width:768px) {
+
+    .booking-cards {
+        grid-template-columns: minmax(180px,300px);
+    }
+}

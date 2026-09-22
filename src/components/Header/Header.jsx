@@ -1,6 +1,5 @@
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import './Header.css';
-import Button from '../Button/Button';
 import { Wheat } from 'lucide-react';
 
 
@@ -80,9 +79,15 @@ function Header() {
             </nav>
 
             <div className="header-action">
-                <Button>Book Now</Button>
-                <Button>Login</Button>
-                <Button>Register</Button>
+                <Link
+                    to={'/bookingChoice'}
+                    onClick={(event) => handleNavClick(event, '/bookingChoice')}
+                >
+                    Book Now
+                </Link>
+                
+                <Link>Login</Link>
+                <Link>Register</Link>
             </div>
         </header>
     )

@@ -34,8 +34,7 @@ function DestinationCard({ destination }) {
                 <h3 className="rating">
                     <span>{country}</span>
                     <span className="rate">{rating}⭐</span>
-                </h3>
-
+                </h3>   
 
                 <div className="description-wrapper">
                     <p

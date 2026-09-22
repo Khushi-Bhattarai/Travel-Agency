@@ -65,9 +65,35 @@ nav a.active {
     border-bottom: 2px solid var(--primary);
 }
 
-.header-action{
+.header-action {
     display: flex;
     gap: var(--space-sm);
+}
+
+.header-action a {
+    text-decoration: none;
+    color: #000;
+
+    padding: var(--space-xs);
+
+    border: 2px solid var(--primary);
+    border-radius: var(--space-xs);
+
+    background: transparent;
+
+    transition:
+        background-color 200ms ease,
+        color 200ms ease,
+        transform 100ms ease,
+        box-shadow 300ms ease;
+    animation: slideLeft 400ms linear;
+}
+
+.header-action a:hover {
+    color: darkslategrey;
+    transform:
+        scale(1.04);
+    box-shadow: var(--shadow);
 }
 
 @media (max-width:992px) {

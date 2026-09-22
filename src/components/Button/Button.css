@@ -1,4 +1,4 @@
-button {
+button{
     padding: var(--space-xs);
     border: 2px solid var(--primary);
     border-radius: var(--space-xs);

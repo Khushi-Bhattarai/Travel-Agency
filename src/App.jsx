@@ -9,6 +9,7 @@ import DestinationBooking from "./pages/Booking/DestinationBooking";
 import TourPackageBooking from "./pages/Booking/TourPackageBooking";
 import DestinationDetail from "./pages/Destinations/DestinationDetail";
 import TourPackageDetail from "./pages/Tours/ToursDetail";
+import DirectBooking from "./pages/Booking/DirectBooking";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/booking/destinations/:destinationId" element={<DestinationBooking />}></Route>
         <Route path="/tours/:tourPackageId" element={<TourPackageDetail />}></Route>
         <Route path="/booking/tours/:tourPackageId" element={<TourPackageBooking />}></Route>
+        <Route path="/bookingChoice" element={<DirectBooking/>}></Route>
 
       </Route>
 
