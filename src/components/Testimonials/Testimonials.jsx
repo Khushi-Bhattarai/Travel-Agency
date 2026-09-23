@@ -1,4 +1,4 @@
-import TestimonialData from "./TestimonialData";
+import TestimonialData from "../../data/TestimonialData";
 import TestimonialCard from "./TestimonialCard";
 import SectionTitle from '../SectionTitle/SectionTitle';
 import './Testimonials.css'

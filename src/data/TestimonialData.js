@@ -1,6 +1,6 @@
-import Avatar_1 from '../../assets/avatar_1.avif';
-import Avatar_2 from '../../assets/avatar_2.avif';
-import Avatar_3 from '../../assets/avatar_3.avif';
+import Avatar_1 from '../assets/avatar_1.avif';
+import Avatar_2 from '../assets/avatar_2.avif';
+import Avatar_3 from '../assets/avatar_3.avif';
 
 
 const TestimonialData = [

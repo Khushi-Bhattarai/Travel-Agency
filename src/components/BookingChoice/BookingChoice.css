@@ -7,7 +7,7 @@
 
 .booking-cards{
     display: grid;
-    grid-template-columns: repeat(2,minmax(150px, 400px));
+    grid-template-columns: repeat(2,minmax(250px, 400px));
     justify-content: center;
     gap: var(--space-lg);
     padding-top: var(--space-xs);
