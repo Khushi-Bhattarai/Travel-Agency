@@ -1,12 +1,8 @@
-import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import './DestinationCard.css';
 
 function DestinationCard({ destination }) {
 
-    const [expanded, setExpanded] = useState(false);
-    const [showMore, setShowMore] = useState(false);
-    const descriptionRef = useRef(null);
 
     const {
         image,
@@ -17,13 +13,7 @@ function DestinationCard({ destination }) {
         duration
     } = destination;
 
-    useEffect(() => {
-        const element = descriptionRef.current;
-
-        if (element.scrollHeight > element.clientHeight) {
-            setShowMore(true);
-        }
-    }, []);
+  
 
     return (
         <div className="destination-card">
@@ -31,27 +21,16 @@ function DestinationCard({ destination }) {
                 alt={country}
             />
             <div className="destination-card-content">
+
                 <h3 className="rating">
                     <span>{country}</span>
                     <span className="rate">{rating}⭐</span>
-                </h3>   
+                </h3>
 
                 <div className="description-wrapper">
-                    <p
-                        ref={descriptionRef}
-                        className={`description ${expanded ? "expanded" : ""}`}
-                    >
+                    <p>
                         {description}
                     </p>
-
-                    {showMore && !expanded && (
-                        <button
-                            className="see-more"
-                            onClick={() => setExpanded(true)}
-                        >
-                            See More
-                        </button>
-                    )}
                 </div>
 
                 <div className="destination-wrapper">
@@ -68,6 +47,7 @@ function DestinationCard({ destination }) {
                         Book Now
                     </Link>
                 </div>
+                
             </div>
         </div>
     )

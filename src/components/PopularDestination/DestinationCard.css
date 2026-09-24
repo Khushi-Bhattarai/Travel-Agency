@@ -49,25 +49,12 @@
     margin-top: auto;
 }
 
-.description {
+.description-wrapper{
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
+    line-clamp: 3;
     overflow: hidden;
-    margin: 0;
-}
-
-.description.expanded {
-    height: auto;
-}
-
-.see-more {
-    border: none;
-    background: none;
-    padding: 0;
-
-    cursor: pointer;
-    color: var(--primary);
 }
 
 .viewBook{
