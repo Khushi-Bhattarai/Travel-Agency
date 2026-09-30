@@ -49,12 +49,16 @@
     margin-top: auto;
 }
 
-.description-wrapper{
+.description{
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     line-clamp: 3;
     overflow: hidden;
+}
+
+.description.expanded{
+    display: block;
 }
 
 .viewBook{

@@ -35,7 +35,7 @@ const Destination = [
         id: "D1",
         image: tajMahal,
         country: "India",
-        description: "Discover India, a vibrant land of ancient heritage, majestic palaces, and profound spirituality. Experience the chaotic charm of Delhi and the pink sandstone beauty of Jaipur. Witness the breathtaking sunrise glow of the iconic Taj Mahal in Agra. Conclude your journey savoring the tranquil backwaters of Kerala.",
+        description: "Discover India, a vibrant land of ancient heritage, majestic palaces, and profound spirituality. Experience the chaotic charm of Delhi ",
         price: 50000,
         rating: 4.8,
         duration: 2,
